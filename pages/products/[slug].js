@@ -90,12 +90,14 @@ return {
 
 export default ({ products }) => {
     console.log("PRODUCTS: ", products)
-    return (products.map(({ id, name, description, price, images, url }) => (
+    return (products.map(({ id, name, description, price, images }) => (
         < Fragment key = {id}>
             <h1 >{name}</h1>
             <div>{description}</div>
             <div>{price}</div>
-            <img src={images[0].url} ></img>
+           { 
+           images.length > 0 && <img src={images} ></img>
+           }
         </Fragment>
         )
     ))

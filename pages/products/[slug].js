@@ -32,16 +32,35 @@ export async function getStaticProps () {
        },
        products {
            slug
+           id
            name
            description
            price
+           images {
+                url(
+                    transformation: {
+                        document: {
+                            output: {
+                                format: png
+                            }
+                        },
+                        image: {
+                            resize: {
+                                fit: crop,
+                                height: 100,
+                                width: 100
+                            }
+                        }
+                    }
+                )
+           }
        }
     }
     `
     )
         return {
             props: {
-                // assets
+                // assets,
                 products
             }
         }
@@ -69,27 +88,15 @@ return {
 }
 
 
-// export function Description({products}) {
-// products.map(({ id, name, description, price }) => (
-//         < Fragment key = {id}>
-//             <h1 >{name}</h1>
-//             <div>{description}</div>
-//             <div>{price}</div>
-//         </Fragment>
-//         )
-//     )
-// }
-
-
-export default ({ assets }) =>
-    assets.map(({ id, name, description, price, images, url }) => (
+export default ({ products }) => {
+    console.log("PRODUCTS: ", products)
+    return (products.map(({ id, name, description, price, images, url }) => (
         < Fragment key = {id}>
-            {/* <h1 >{name}</h1>
+            <h1 >{name}</h1>
             <div>{description}</div>
-            <div>{price}</div> */}
-            {/* <div>{images.fileName}</div> */}
-            {/* <div>{images.url}</div> */}
-            <img src = {url} alt = {url}  />
+            <div>{price}</div>
+            <img src={images[0].url} ></img>
         </Fragment>
         )
-    )
+    ))
+}

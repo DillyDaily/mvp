@@ -95,9 +95,16 @@ export default ({ products }) => {
             <h1 >{name}</h1>
             <div>{description}</div>
             <div>{price}</div>
-           { 
-           images.length > 0 && <img src={images} ></img>
-           }
+           { images.length > 0 && <img src={images[0].url} />}
+           { images.length > 1 && <img src={images[1].url} />}
+           { images.length > 2 && <img src={images[2].url} />}
+           { images.length > 3 && <img src={images[3].url} />}
+           { images.length > 4 && <img src={images[4].url} />}
+           { images.length > 5 && <img src={images[5].url} />}
+           { images.length > 6 && <img src={images[6].url} />}
+           { images.length > 7 && <img src={images[7].url} />}
+           { images.length > 8 && <img src={images[8].url} />}
+           { images.length > 9 && <img src={images[9].url} />}
         </Fragment>
         )
     ))

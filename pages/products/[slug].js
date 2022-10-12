@@ -8,30 +8,10 @@ const hygraph = new GraphQLClient(
 
 // GET ALL assets & info:
 export async function getStaticProps () {
-  const { assets, products } = await hygraph.request(
+  const { products } = await hygraph.request(
       `
       {
-       assets {
-            id
-            url(
-               transformation: {
-                   document: {
-                       output: {
-                           format: png
-                       }
-                   },
-                   image: {
-                       resize: {
-                           fit: crop,
-                           height: 100,
-                           width: 100
-                       }
-                   }
-               }
-           )
-       },
        products {
-           slug
            id
            name
            description
@@ -61,7 +41,6 @@ export async function getStaticProps () {
     )
         return {
             props: {
-                // assets,
                 products
             }
         }
@@ -77,9 +56,6 @@ export async function getStaticPaths () {
     }
     `)
 
-
-
-
 return {
     paths: products.map(({ slug }) => ({
             params: { slug }
@@ -89,8 +65,8 @@ return {
 }
 
 
-export default ({ products }) => {
-    console.log("PRODUCTS: ", products)
+const ProductSlug = (props) => {
+    const { products } = props;
     return (products.map(({ id, name, description, price, images }) => (
         < Fragment key = {id}>
             <h1 >{name}</h1>
@@ -105,3 +81,5 @@ export default ({ products }) => {
         )
     ))
 }
+
+export default ProductSlug;

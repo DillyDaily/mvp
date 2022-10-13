@@ -6,7 +6,7 @@ const hygraph = new GraphQLClient(
 )
 
 export async function getStaticProps () {
-    const { products } = await hygraph.request(
+    const req = await hygraph.request(
     `
         {
             products {
@@ -38,9 +38,10 @@ export async function getStaticProps () {
         }
     `
   )
+  console.log("WAT: ", req.products)
   return {
     props: {
-      products
+      products: {}
     }
   }
 }
